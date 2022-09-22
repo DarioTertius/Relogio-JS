@@ -1,0 +1,33 @@
+body{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(167,11,205,1) 35%, rgba(0,74,255,1) 75%);
+}
+
+.clock-container{
+    font-size: 4em;
+    text-align: center;
+    margin: 200px auto 0;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.clock-container span{
+    padding: 20px;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.date-container{
+    font-size: 4em;
+    text-align:center;
+    margin: 100px auto 0;
+    color: rgba(255, 255, 255, 0.986);
+    font-family: Regular 400 at 48px;
+    position: relative;
+}
+
+.date-container span{
+    padding: 20px;
+   
+    border-radius: 10px;
+}
