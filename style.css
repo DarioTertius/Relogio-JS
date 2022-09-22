@@ -28,6 +28,6 @@ body{
 
 .date-container span{
     padding: 20px;
-   
+    background-color: black;
     border-radius: 10px;
 }
