@@ -98,39 +98,53 @@ console.log(teste.toLocaleDateString('pt-BR', options))
 console.log(teste.toLocaleDateString('pt-BR'))
 console.log(teste.toLocaleTimeString('pt-BR'))
 
-function getUserPosition(){
-    let url = ''
-    navigator.geolocation.getCurrentPosition((pos) =>{
-       // let lat = pos.coords.latitude
-        //let long = pos.coords.longitude
-        url = `https://api.openweathermap.org/data/2.5/weather?lat=-4.3290203&lon=-38.8821055&units=imperial&APPID=622296cd4fda08b69c46ccfa980f968d`
-        fetchApi(url)
-        console.log(url)    
-    })
+
+const api = {
+    key: "4042803c4430538da4324d5ad6f1df67",
+    base: "https://api.openweathermap.org/data/2.5/",
+    lang: "pt_br",
+    units: "metric"
 }
 
-function fetchApi(url) {
+const controlTemperature = document.querySelector('#temperature')
+const city = document.querySelector('#city')
+const temp = document.querySelector('#temp')
+const umidade = document.querySelector('#umid')
+
+function getUserPosition() {
+    let url = ''
+    navigator.geolocation.getCurrentPosition((pos) => {
+      let lat = pos.coords.latitude
+      let long = pos.coords.longitude
+      let key = "4042803c4430538da4324d5ad6f1df67"
+      url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&APPID=4042803c4430538da4324d5ad6f1df67`
+      fetchApi(url)
+      console.log(url)
+    })
+  }
+  
+  function fetchApi(url) {
     let city = document.querySelector('.city')
     let temperature = document.querySelector('#temp')
-    let humidity = document.querySelector('#umid')
-
+    let humidity = document.querySelector('#umidad')
+  
     fetch(url)
     .then((data) => {
-        return data.json()
+      return data.json()
     })
+    .then((data) => {
+      let tempInCelsius = ((5/9) * (data.main.temp-32)).toFixed(1);
+      
+      city.innerHTML      = data.name
+      temperature.innerHTML = tempInCelsius
+      humidity.innerHTML    = data.main.humidity
+    })
+    .catch((err) => {
+      city.innerText = `Impossível acessar o OpenWeather. Verifique a sua conexão.`;
+      temperature.innerHTML = `-`;
+    })
+  }
+  
+  getUserPosition();
 
 
-.then((data) => {
-    let tempInCelsius =((5/9) * (data.main.temp-32)) .toFixed(1);
-
-    city.textContent = data.name
-    temperature.innerHtml = tempInCelsius
-    humidity.innerHtml = data.main.humidity
-})
-
-.cath((err) => {
-    city.innerText = `Impossível acessar o OpenWeather. Verifique a conexão com a internet`;
-    temperature.innerHTML = `--`
-})
-}
-getUserPosition();
