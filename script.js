@@ -1,34 +1,136 @@
-const clockContainer = document.querySelector('.clock-container')
-const dateContainer = document.querySelector('.date-container')
+let watch = document.querySelector('#watch')
+let h = document.querySelector('#h')
+let m = document.querySelector('#m')
+let s = document.querySelector('#s')
 
-const formatTimeUnit = unit => String(unit).length ===1 ? `0${unit}` : unit
+let hSmart = document.querySelector('#hSmart')
+let mSmart = document.querySelector('#mSmart')
+let sSmart  = document.querySelector('#sSmart')
 
-const getClockHTML = (hours, minutes, sec) => `
-    <span>${formatTimeUnit(hours)}</span> :
-    <span>${formatTimeUnit(minutes)}</span> :
-    <span>${formatTimeUnit(sec)}</span>
-`
-const getDateHTML = (day, month, year) => `
-    <span>${formatTimeUnit(day)}</span>
-    <span>${formatTimeUnit(month)}</span>
-    <span>${formatTimeUnit(year)}</span>
-`
+let date = document.querySelector('#date')
+let week = document.querySelector('#week')
 
-const updateClock = () =>{
-    const present = new Date()
-    const hours = present.getHours()
-    const minutes = present.getMinutes()
-    const sec = present.getSeconds()
-    const day = present.getDay()
-    const month = present.getMonth()
-    const year = present.getFullYear()
+let dateHour = new Date()
 
-dateContainer.innerHTML = getDateHTML(day,month, year)     
-clockContainer.innerHTML =  getClockHTML(hours, minutes, sec)
+function moveWatch() {
 
+    let nowMoment = new Date()
+
+    let hour = nowMoment.getHours()
+    let minute = nowMoment.getMinutes()
+    let second = nowMoment.getSeconds()
+
+    let strHour = new String (hour)
+    let strMinutes = new String (minute)
+    let strSec = new String (second)
+
+    if (strHour.length == 1) hour = "0" + hour
+    if (strMinutes.length == 1) minute = "0" + minute
+    if (strSec.length == 1) second = "0" + second
+    
+    h.textContent = hour
+    m.textContent = minute
+    s.textContent = second
+
+    hSmart.textContent = hour
+    mSmart.textContent = minute
+    sSmart.textContent = second
+    
+    setTimeout("moveWatch()", 1000)
+}
+
+function getDate(){
+    let dayofWeek = dateHour.getDay()
+    let day = dateHour.getDate()
+    let mouth = dateHour.getMonth() +1
+    let year = dateHour.getFullYear()
+
+    let strDay = new String (day)
+    let strMouth = new String (mouth)
+
+    if(strDay.length ==1) mouth = '0' + day
+    if(strMouth.length == 1) mouth = '0' + mouth
+
+    switch(dayofWeek){
+        case 0:
+            dayofWeek = 'DOM'
+            break;
+        case 1:
+            dayofWeek = 'SEG'
+            break;
+        case 2:
+            dayofWeek = 'TER'
+            break;
+        case 3:
+            dayofWeek = 'QUA'
+            break;
+        case 4:
+            dayofWeek = 'QUI'
+            break;
+        case 5:
+            dayofWeek = 'SEX'
+            break;
+        case 6:
+            dayofWeek = 'SAB'
+            break;                        
+    }
+
+    let dateActual = `${day} / ${mouth} / ${year}`
+
+    week.textContent = dayofWeek
+    date.textContent = dateActual
 
 }
 
+getDate()
+
+var options ={
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+}
+
+let teste = new Date()
+
+console.log(teste.toLocaleString('pt-BR'))
+console.log(teste.toLocaleDateString('pt-BR', options))
+console.log(teste.toLocaleDateString('pt-BR'))
+console.log(teste.toLocaleTimeString('pt-BR'))
+
+function getUserPosition(){
+    let url = ''
+    navigator.geolocation.getCurrentPosition((pos) =>{
+       // let lat = pos.coords.latitude
+        //let long = pos.coords.longitude
+        url = `https://api.openweathermap.org/data/2.5/weather?lat=-4.3290203&lon=-38.8821055&units=imperial&APPID=622296cd4fda08b69c46ccfa980f968d`
+        fetchApi(url)
+        console.log(url)    
+    })
+}
+
+function fetchApi(url) {
+    let city = document.querySelector('.city')
+    let temperature = document.querySelector('#temp')
+    let humidity = document.querySelector('#umid')
+
+    fetch(url)
+    .then((data) => {
+        return data.json()
+    })
 
 
-setInterval(updateClock, 1000)
+.then((data) => {
+    let tempInCelsius =((5/9) * (data.main.temp-32)) .toFixed(1);
+
+    city.textContent = data.name
+    temperature.innerHtml = tempInCelsius
+    humidity.innerHtml = data.main.humidity
+})
+
+.cath((err) => {
+    city.innerText = `Impossível acessar o OpenWeather. Verifique a conexão com a internet`;
+    temperature.innerHTML = `--`
+})
+}
+getUserPosition();

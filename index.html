@@ -4,20 +4,50 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Relógio</title>
+        <title>Relógio Smart</title>
         <link rel="stylesheet" href="style.css">
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Poppins:wght@100&display=swap');
-        </style>
-        
     </head>
+    <body onload="moveWatch()">
+    <main class="firstival-screen">
+
+            <section class="content">
+                
+                <div id="watchdigital">
+                    <span id="h"></span>:<span  id="m">:</span>:<span id="s"></span>
+                </div>
 
 
-    <body>
-       
-    <div class="clock-container"></div>  
-    <div class="date-container"></div>   
-        
-    <script src="./script.js"></script>
+                    <div id="screenSmartWatch">
+                    
+                        <div id="digital-watch">
+                            <span id="hSmart"></span>
+                            <span class="doisPontos">:</span>
+                            <span id="mSmart"></span>
+                            <samp class="doisPontos">:</samp>
+                            <span id="sSmart"></span>
+                            <samp class="doisPontos"></samp>
+                        </div>    
+                    
+
+                <div id="dateSmart">
+                
+                    <span id="week"></span>
+                    <span id="date"></span>
+
+                </div>
+                
+                <div id="temperature">
+                    <h1 class="city"></h1>
+                    <h2>
+                        🌡<span id="temp"> °C 💧</span>
+                        <span id="umidad">%</span>
+                    </h2>
+                </div>
+                </div>
+            </div>    
+            </section>
+
+    </main>    
+    <script src="./script.js"></script>    
     </body>
     </html>
