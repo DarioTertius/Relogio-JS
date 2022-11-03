@@ -42,14 +42,14 @@ function moveWatch() {
 function getDate(){
     let dayofWeek = dateHour.getDay()
     let day = dateHour.getDate()
-    let mouth = dateHour.getMonth() +1
+    let mouth = dateHour.getMonth() + 1;
     let year = dateHour.getFullYear()
 
     let strDay = new String (day)
     let strMouth = new String (mouth)
 
-    if(strDay.length ==1) mouth = '0' + day
-    if(strMouth.length == 1) mouth = '0' + mouth
+   // if(strDay.length ==1) mouth = '0' + day
+    //if(strMouth.length == 1) mouth = '0' + mouth
 
     switch(dayofWeek){
         case 0:
@@ -87,7 +87,7 @@ getDate()
 var options ={
     weekday: 'long',
     year: 'numeric',
-    month: 'long',
+    month: 'numeric',
     day: 'numeric'
 }
 

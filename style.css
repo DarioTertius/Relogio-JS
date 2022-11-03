@@ -28,9 +28,9 @@ section{
 
     user-select: none;
 
-    margin: 12rem;
+    margin: 6rem;
     padding: 0 1rem;
-    font-size: 2rem;
+    font-size: 7rem;
     text-align: center;
     background-color: #fff;
     border-radius: 10px;
@@ -49,23 +49,29 @@ section{
     background: #111;
     color: white;
     text-align: center;
-    font-size: 2rem;
+    font-size: 6rem;
 }
 
 
 #digital-watch{
     user-select: none;
     margin-top: 1rem;
+
+    font-size: 3rem;
 }
 
 #hSmart, mSmart{
     font-size: 2rem;
     color: #fff;
+
+    font-size: 3rem
+    ;
 }
 
 #sSmart{
     font-size: 1rem;
     color: #fff;
+    font-size: 2rem;
 }
 
 #dateSmart{
@@ -73,6 +79,8 @@ section{
     color: white;
     display: inline-block;
     font-size: 1rem;
+
+    font-size: 4rem;
 }
 
 #week{
@@ -102,4 +110,6 @@ section{
     font-family: sans-serif;
     font-size: 0.5rem;
     color: #fff;
+
+    font-size: 1.5rem;
 }
